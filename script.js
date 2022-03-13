@@ -56,29 +56,37 @@ async function startAnimation() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawFrame(cycleLoop[currentLoopIndex], 17.2, 250, 80);
 
-        await sleep(1000);
+        startDialogue();
 
-        drawBubble(ctx, 0, 0, 300, 30, 20, "Where is King Clovis' Chamber?", "white", "brown", 80, 20, "12px Times New Roman");
-
-        await sleep(2500);
-
-        drawBubble(ctx, 0, 0, 300, 30, 20, "Right down the hall. Check in with the other knights before entering.", "white", "gray", 12, 19, "10px Times New Roman");
-
-        await sleep(3000);
-
-        drawBubble(ctx, 0, 0, 300, 30, 20, "Understood. Long live the king.", "white", "brown", 80, 20, "12px Times New Roman");
-
-        await sleep(3000);
-
-        ctx.clearRect(2, 0, canvas.width, canvas.height);
-        drawFrame(2, 20.4, 250, 80);
-
-        await sleep(250);
+        await sleep(9750);
 
         xPos = -80;
         continue;
     }
 }
+
+async function startDialogue() {
+    //Creates the dialogue between the knight and the robed man
+    await sleep(1000);
+
+    drawBubble(ctx, 0, 0, 300, 30, 20, "Where is King Clovis' Chamber?", "white", "brown", 80, 20, "12px Times New Roman");
+
+    await sleep(2500);
+
+    drawBubble(ctx, 0, 0, 300, 30, 20, "Right down the hall. Check in with the other knights before entering.", "white", "gray", 12, 19, "10px Times New Roman");
+
+    await sleep(3000);
+
+    drawBubble(ctx, 0, 0, 300, 30, 20, "Understood. Long live the king.", "white", "brown", 80, 20, "12px Times New Roman");
+
+    await sleep(3000);
+
+    ctx.clearRect(2, 0, canvas.width, canvas.height);
+    drawFrame(2, 20.4, 250, 80);
+
+    await sleep(250);
+}
+
 
 function drawBubble(ctx, x, y, w, h, radius, text, backgroundColor, textColor, textX, textY, font) {
     //Draws the speech bubble for characters to talk
