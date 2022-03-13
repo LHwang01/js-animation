@@ -28,72 +28,87 @@ let xPos = -80;
 
 async function walkToKnight() {
     while (true) {
-        frameCount++;
+        while (!(xPos >= 250)) {
+            frameCount++;
 
-        if (frameCount < 15) {
-            window.requestAnimationFrame(walkToKnight);
-            return;
+            if (frameCount < 15) {
+                window.requestAnimationFrame(walkToKnight);
+                return;
+            }
+
+            frameCount = 0;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawFrame(cycleLoop[currentLoopIndex], 20.4, xPos += 20, 80);
+            currentLoopIndex++;
+
+            if (currentLoopIndex >= cycleLoop.length) {
+                currentLoopIndex = 0;
+            }
         }
-
-        frameCount = 0;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawFrame(cycleLoop[currentLoopIndex], 17.2, 250, 80);
 
-        if (xPos >= 130) {
-            drawFrame(cycleLoop[currentLoopIndex], 17.2, 150, 80);
-            break;
-        }
+        await sleep(1000);
 
-        drawFrame(cycleLoop[currentLoopIndex], 20.4, xPos += 20, 80);
-        currentLoopIndex++;
+        drawBubble(ctx, 0, 0, 300, 30, 20, "Where is King Clovis' Chamber?", "white", "brown", 80, 20, "12px Times New Roman");
 
-        if (currentLoopIndex >= cycleLoop.length) {
-            currentLoopIndex = 0;
-        }
+        await sleep(2500);
+
+        drawBubble(ctx, 0, 0, 300, 30, 20, "Right down the hall. Check in with the other knights before entering.", "white", "gray", 12, 19, "10px Times New Roman");
+
+        await sleep(3000);
+
+        drawBubble(ctx, 0, 0, 300, 30, 20, "Understood. Long live the king.", "white", "brown", 80, 20, "12px Times New Roman");
+
+        await sleep(3000);
+
+        ctx.clearRect(2, 0, canvas.width, canvas.height);
+        drawFrame(2, 20.4, 250, 80);
+
+        await sleep(250);
+
+        xPos = -80;
+        continue;
     }
-
-    await sleep(1000);
-
-    drawBubble(ctx, 0, 0, 300, 30, 20, "Where is King Clovis' Chamber?", "white", "black", 80, 20);
-
-    //double while loop
 }
 
 function sleep(milliseconds) {
     return new Promise((resolve) => {
-      setTimeout(resolve, milliseconds);
+        setTimeout(resolve, milliseconds);
     });
 }
 
-function drawBubble(ctx, x, y, w, h, radius, text, backgroundColor, textColor, textX, textY)
-{
-   var r = x + w;
-   var b = y + h;
+function drawBubble(ctx, x, y, w, h, radius, text, backgroundColor, textColor, textX, textY, font) {
+    var r = x + w;
+    var b = y + h;
 
-   ctx.beginPath();
-   ctx.fillStyle = backgroundColor;
+    ctx.beginPath();
+    ctx.fillStyle = backgroundColor;
 
-   ctx.strokeStyle = "black";
-   ctx.lineWidth = "1.5";
-   ctx.moveTo(x + radius, y);
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = "1.5";
+    ctx.moveTo(x + radius, y);
 
-   ctx.lineTo(r - radius, y);
-   ctx.quadraticCurveTo(r, y, r, y + radius);
-   ctx.lineTo(r, y + h-radius);
-   ctx.quadraticCurveTo(r, b, r - radius, b);
-   ctx.lineTo(x + radius, b);
-   ctx.quadraticCurveTo(x, b, x, b - radius);
-   ctx.lineTo(x, y + radius);
-   ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.lineTo(r - radius, y);
+    ctx.quadraticCurveTo(r, y, r, y + radius);
+    ctx.lineTo(r, y + h - radius);
+    ctx.quadraticCurveTo(r, b, r - radius, b);
+    ctx.lineTo(x + radius, b);
+    ctx.quadraticCurveTo(x, b, x, b - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
 
-   ctx.fill();
+    ctx.fill();
 
-   ctx.stroke();
+    ctx.stroke();
 
-   ctx.fillStyle = textColor;
+    ctx.fillStyle = textColor;
 
-   ctx.font = "12px Times New Roman";
-   ctx.fillText(text, textX, textY);
+    ctx.font = font;
+    ctx.fillText(text, textX, textY);
 }
 
 function init() {
