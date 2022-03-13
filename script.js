@@ -27,7 +27,7 @@ let frameCount = 0;
 let xPos = -80;
 
 function walkToKnight() {
-    for (let i = 0; i < 3; i++) {
+    while (true) {
         frameCount++;
 
         if (frameCount < 15) {
@@ -51,12 +51,46 @@ function walkToKnight() {
             currentLoopIndex = 0;
         }
     }
+
+    drawBubble(ctx, 0, 0, 300, 30, 20, "How do I get to the king?", "white", "black", 100, 17);
+
+    //double while loop
 }
 
 function talk() {
 }
 
+function drawBubble(ctx, x, y, w, h, radius, text, backgroundColor, textColor, textX, textY)
+{
+   var r = x + w;
+   var b = y + h;
+
+   ctx.beginPath();
+   ctx.fillStyle = backgroundColor;
+
+   ctx.strokeStyle = "black";
+   ctx.lineWidth = "1.5";
+   ctx.moveTo(x + radius, y);
+
+   ctx.lineTo(r - radius, y);
+   ctx.quadraticCurveTo(r, y, r, y + radius);
+   ctx.lineTo(r, y + h-radius);
+   ctx.quadraticCurveTo(r, b, r - radius, b);
+   ctx.lineTo(x + radius, b);
+   ctx.quadraticCurveTo(x, b, x, b - radius);
+   ctx.lineTo(x, y + radius);
+   ctx.quadraticCurveTo(x, y, x + radius, y);
+
+   ctx.fill();
+
+   ctx.stroke();
+
+   ctx.fillStyle = textColor;
+
+   ctx.font = "10px Times New Roman";
+   ctx.fillText(text, textX, textY);
+}
+
 function init() {
     walkToKnight();
-    turnAndTalk();
 }
