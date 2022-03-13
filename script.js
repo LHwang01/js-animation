@@ -40,7 +40,7 @@ function step() {
         xPos = -80;
     }
 
-    drawFrame(cycleLoop[currentLoopIndex], 20.4, xPos += 20, 90);
+    drawFrame(cycleLoop[currentLoopIndex], 20.4, xPos += 20, 80);
     currentLoopIndex++;
 
     if (currentLoopIndex >= cycleLoop.length) {

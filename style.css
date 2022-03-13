@@ -2,7 +2,7 @@ canvas {
     border: 1px solid #d3d3d3;
     width: 100%;
     height: 100vh;
-    background: url('stone-wall.jpg')
+    background: url('stone-wall-with-knight.png')
 }
 
 a:visited { 
