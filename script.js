@@ -26,13 +26,18 @@ let currentLoopIndex = 0;
 let frameCount = 0;
 let xPos = -80;
 
-async function walkToKnight() {
+function init() {
+    startAnimation();
+}
+
+async function startAnimation() {
+    //The main animation function
     while (true) {
         while (!(xPos >= 250)) {
             frameCount++;
 
             if (frameCount < 15) {
-                window.requestAnimationFrame(walkToKnight);
+                window.requestAnimationFrame(startAnimation);
                 return;
             }
 
@@ -75,13 +80,8 @@ async function walkToKnight() {
     }
 }
 
-function sleep(milliseconds) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, milliseconds);
-    });
-}
-
 function drawBubble(ctx, x, y, w, h, radius, text, backgroundColor, textColor, textX, textY, font) {
+    //Draws the speech bubble for characters to talk
     var r = x + w;
     var b = y + h;
 
@@ -111,6 +111,9 @@ function drawBubble(ctx, x, y, w, h, radius, text, backgroundColor, textColor, t
     ctx.fillText(text, textX, textY);
 }
 
-function init() {
-    walkToKnight();
+function sleep(milliseconds) {
+    //Allows a delay before another function is called
+    return new Promise((resolve) => {
+        setTimeout(resolve, milliseconds);
+    });
 }
