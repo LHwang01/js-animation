@@ -24,6 +24,7 @@ function drawFrame(frameX, frameY, canvasX, canvasY) {
 const cycleLoop = [0, 1, 2, 3, 0, 1, 2, 3];
 let currentLoopIndex = 0;
 let frameCount = 0;
+let xPos = -80;
 
 function step() {
     frameCount++;
@@ -35,7 +36,11 @@ function step() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    drawFrame(cycleLoop[currentLoopIndex], 20.4, 0, 90);
+    if (xPos >= 250) {
+        xPos = -80;
+    }
+
+    drawFrame(cycleLoop[currentLoopIndex], 20.4, xPos += 20, 90);
     currentLoopIndex++;
 
     if (currentLoopIndex >= cycleLoop.length) {
